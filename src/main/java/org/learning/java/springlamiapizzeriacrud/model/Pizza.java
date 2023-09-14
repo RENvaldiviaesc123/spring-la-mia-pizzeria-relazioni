@@ -15,6 +15,7 @@ public class Pizza {
     private String name;
     private String description;
     private BigDecimal price;
+    private String foto;
 
     //GETTER E SETTER
 
@@ -48,5 +49,13 @@ public class Pizza {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }
