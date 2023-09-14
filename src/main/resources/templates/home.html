@@ -14,6 +14,7 @@
 <body>
 <div class="container">
     <h1>Pizzeria</h1>
+    <h3>Le nostre specialità</h3>
     <table class="table">
         <thead>
         <tr>
@@ -28,7 +29,7 @@
             <td th:text="${pizza.name}"></td>
             <td th:text="${pizza.description}"></td>
             <td th:text="${pizza.price}"></td>
-            <td th:text="${pizza.foto}"></td>
+            <td th:href="${pizza.foto}"></td>
         </tr>
         </tbody>
     </table>
