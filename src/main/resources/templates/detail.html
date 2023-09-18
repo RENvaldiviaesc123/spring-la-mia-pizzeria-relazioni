@@ -9,5 +9,11 @@
 </head>
 <body>
 <h1 th:text="${pizza.name}"></h1>
+<h4>La pizza presenta i seguenti ingredienti: </h4>
+<p th:text="${pizza.description}"></p>
+<h4>Il suo prezzo è:</h4>
+<p th:text="${pizza.price}"></p>
+<h4>Immagine referenziale:</h4>
+<img th:src="${pizza.foto}">
 </body>
 </html>
