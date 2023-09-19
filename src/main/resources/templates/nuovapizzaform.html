@@ -13,7 +13,61 @@
 </head>
 <body>
 <h1>Aggiungi una nuova pizza</h1>
+<form
+        id="book-form"
+        th:action="@{/books/create}"
+        th:object="${book}"
+        method="POST"
+>
+    <!-- name -->
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome della pizza:</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}" required
+               th:errorClass="is-invalid">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
 
+    <!-- description -->
+    <div class="mb-3">
+        <label for="description" class="form-label">Descrizione della pizza:</label>
+        <input type="text" class="form-control" id="description" th:field="*{description}" required
+               th:errorClass="is-invalid">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- price -->
+    <div class="mb-3">
+        <label for="price" class="form-label">Prezzo:</label>
+        <input type="number" class="form-control" id="price" th:field="*{price}" required
+               th:errorClass="is-invalid">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- foto -->
+    <div class="mb-3">
+        <label for="foto" class="form-label">Url della foto:</label>
+        <input type="text" class="form-control" id="foto" th:field="*{foto}" required
+               th:errorClass="is-invalid">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('foto')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('foto')}" th:text="${err}"></li>
+            </ul>
+        </div>
+    </div>
+
+</form>
 
 <div class="mb-3">
     <button type="submit" class="btn btn-primary">Salva</button>
