@@ -44,4 +44,12 @@ public class PizzaController {
         }
     }
 
+
+    //Controller che mostra la pagina per la creazione di una nuova pizza
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("pizza", new Pizza());
+        return "/nuovapizzaform";
+    }
+
 }
