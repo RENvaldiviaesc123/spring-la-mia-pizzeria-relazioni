@@ -47,7 +47,7 @@
         <!-- price -->
         <div class="mb-3">
             <label for="price" class="form-label">Prezzo:</label>
-            <input type="number" class="form-control" id="price" th:field="*{price}" required
+            <input type="number" class="form-control" id="price" step="0.1" th:field="*{price}" required
                    th:errorClass="is-invalid">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
                 <ul>
