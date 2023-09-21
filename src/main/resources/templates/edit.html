@@ -25,7 +25,7 @@
         <!-- name -->
         <div class="mb-3">
             <label for="name" class="form-label">Nome della pizza:</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" required
+            <input type="text" class="form-control" th:field="*{name}" id="name" required
                    th:errorClass="is-invalid">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
                 <ul>
@@ -70,7 +70,7 @@
             <button type="submit" class="btn btn-primary">Salva</button>
             <a class="btn btn-primary" th:href="@{/pizze}">Torna indietro</a>
         </div>
-
+        
 
     </form>
 
