@@ -17,16 +17,20 @@
 </head>
 <body>
 <div class="container">
-    <div>
-        <h1>Pizzeria</h1>
-        <h3>Le nostre specialità</h3>
-        <!-- Box di ricerca -->
-        <form action="">
+
+    <h1>Pizzeria</h1>
+    <h3>Le nostre specialità</h3>
+
+    <!-- Box di ricerca -->
+    <form th:action="@{/pizze}" method="GET">
+        <div class="input-group">
             <input type="search" class="form-control" placeholder="Cerca per nome o ingrediente contenuto"
                    name="keyword" th:value="${keyword}">
             <button class="btn btn-primary">Cerca</button>
-        </form>
-    </div>
+        </div>
+    </form>
+
+
     <table class="table">
         <thead>
         <tr>
