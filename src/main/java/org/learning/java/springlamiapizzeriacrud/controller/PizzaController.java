@@ -24,15 +24,15 @@ public class PizzaController {
 
     @GetMapping
     public String index(@RequestParam(name = "keyword") Optional<String> searchKeyword, Model model) {
-        List<Pizza> pizzaList;
+        List<Pizza> pizze;
         String keyword = "";
         if (searchKeyword.isPresent()) {
             keyword = searchKeyword.get();
-            pizzaList = pizzaRepository.findByNameContainingOrDescriptionContaining(keyword, keyword);
+            pizze = pizzaRepository.findByNameContainingOrDescriptionContaining(keyword, keyword);
         } else {
-            pizzaList = pizzaRepository.findAll();
+            pizze = pizzaRepository.findAll();
         }
-        model.addAttribute("pizzaList", pizzaList);
+        model.addAttribute("pizze", pizze);
         model.addAttribute("keyword", keyword);
         return "home";
     }
