@@ -12,7 +12,7 @@ public class Offerte {
     //ATTRIBUTI
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     @NotNull(message = "Inserisca una data di inizio")
     private LocalDate dataInizio;
     @NotNull(message = "Inserisca una data di fine ")
@@ -25,11 +25,11 @@ public class Offerte {
 
     //GETTER SETTER
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
