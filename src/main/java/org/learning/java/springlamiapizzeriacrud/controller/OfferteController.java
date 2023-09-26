@@ -42,15 +42,42 @@ public class OfferteController {
     }
 
     @PostMapping("/create")
-    public String doCreate(@ModelAttribute("offerta") Offerte offertaForm ) {
+    public String doCreate(@ModelAttribute("offerta") Offerte offertaForm) {
         offerteRepository.save(offertaForm);
-        return "redirect: /pizze/detail/" + offertaForm.getPizza().getId() ;
+        return "redirect:/pizze/detail/" + offertaForm.getPizza().getId();
     }
 
 
     //Metodo per modificare un' offerta
-    @GetMapping("/edit/{pizzaId}")
-    public String edit(@RequestParam"")
+    @GetMapping("/edit/{offertaId}")
+    public String edit(@RequestParam("offertaId") Integer id, Model model) {
+        Optional<Offerte> risultatoOfferta = offerteRepository.findById(id);
+        if (risultatoOfferta.isPresent()) {
+            model.addAttribute("offerta", risultatoOfferta.get());
+            return "/offerte/edit";
 
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 
+    @PostMapping("/edit/{offertaId}")
+    public String doEdit(@PathVariable("offertaId") Integer offertaId, @ModelAttribute("offerta") Offerte offertaForm) {
+        offertaForm.setId(offertaId);
+        offerteRepository.save(offertaForm);
+        return "redirect:/pizze/detail/" + offertaForm.getPizza().getId();
+    }
+
+    //Metodo per la delete
+    @PostMapping("/delete/{offertaId}")
+    public String delete(@PathVariable("offertaId") Integer id) {
+        Optional<Offerte> risultatoOfferta = offerteRepository.findById(id);
+        if (risultatoOfferta.isPresent()) {
+            Integer pizzaId = risultatoOfferta.get().getPizza().getId();
+            offerteRepository.deleteById(id);
+            return "redirect:/pizze/detail/" + pizzaId;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
 }
