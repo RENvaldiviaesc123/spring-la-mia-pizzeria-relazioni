@@ -48,6 +48,8 @@ public class PizzaController {
             return "/detail";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+
         }
     }
 
