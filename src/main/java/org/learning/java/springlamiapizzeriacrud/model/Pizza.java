@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "pizze")
@@ -27,6 +28,8 @@ public class Pizza {
     @NotBlank(message = "Inserisca un'immagine per la pizza!")
     private String foto;
 
+    @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
+    private List<Offerte> offerte;
     //GETTER E SETTER
 
     public int getId() {
@@ -68,4 +71,13 @@ public class Pizza {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public List<Offerte> getOfferte() {
+        return offerte;
+    }
+
+    public void setOfferte(List<Offerte> offerte) {
+        this.offerte = offerte;
+    }
+
 }
