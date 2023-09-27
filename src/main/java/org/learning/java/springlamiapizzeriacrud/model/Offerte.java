@@ -13,13 +13,12 @@ public class Offerte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "Inserisca un titolo")
+    private String title;
     @NotNull(message = "Inserisca una data di inizio")
     private LocalDate dataInizio;
     @NotNull(message = "Inserisca una data di fine ")
     private LocalDate dataFine;
-    @NotBlank(message = "Inserisca un titolo")
-    private String title;
-
     @ManyToOne
     private Pizza pizza;
 

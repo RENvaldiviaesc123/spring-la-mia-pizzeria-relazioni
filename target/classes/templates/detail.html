@@ -23,15 +23,38 @@
     <div class="mb-3 mt-3">
         <a class="btn btn-primary" th:href="@{/pizze}">Torna indietro</a>
     </div>
-</div>
-<!--OFFERTE-->
-<div class="row">
-    <h2>Offerte</h2>
-    <div class="my-3">
-        <a class="btn btn-primary" th:ref="@{/offerte/create/()}">Aggiungi Offerta</a>
-    </div>
+    <!--OFFERTE-->
+    <div class="row">
+        <h2>Offerte</h2>
+        <div class="my-3">
+            <a
+                    class="btn btn-primary"
+                    th:href="@{/offerte/create(pizzaId = ${pizza.id})}">Aggiungi Offerta</a>
+        </div>
 
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Data Inizio</th>
+                <th>Data Fine</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offerta : ${pizza.offerte}">
+                <td th:text="offerta.title"></td>
+                <td th:text="offerta.dataInizio"></td>
+                <td th:text="offerta.dataFine"></td>
+                <td></td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
