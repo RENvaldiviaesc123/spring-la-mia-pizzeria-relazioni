@@ -2,7 +2,9 @@ package org.learning.java.springlamiapizzeriacrud.controller;
 
 
 import jakarta.validation.Valid;
+import org.learning.java.springlamiapizzeriacrud.model.Ingredienti;
 import org.learning.java.springlamiapizzeriacrud.model.Pizza;
+import org.learning.java.springlamiapizzeriacrud.repository.IngredientiRepository;
 import org.learning.java.springlamiapizzeriacrud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,8 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepository;
+    @Autowired
+    private IngredientiRepository ingredientiRepository;
 
     @GetMapping
     public String index(@RequestParam(name = "keyword") Optional<String> searchKeyword, Model model) {
@@ -57,15 +61,18 @@ public class PizzaController {
     //Controller che mostra la pagina per la creazione di una nuova pizza
     @GetMapping("/create")
     public String create(Model model) {
+        List<Ingredienti> ingredientiList = ingredientiRepository.findAll();
+        model.addAttribute("ingredientiList", ingredientiList);
         model.addAttribute("pizza", new Pizza());
         return "/nuovapizzaform";
     }
 
     //Controller per aggiungere una nuova pizza alla nostra lista con usando POST
     @PostMapping("/create")
-    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         //Controlliamo la possibile esistenza di errori
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientiList", ingredientiRepository.findAll());
             return "/nuovapizzaform";
         }
         pizzaRepository.save(formPizza);
@@ -78,6 +85,7 @@ public class PizzaController {
         Optional<Pizza> result = pizzaRepository.findById(id);
         if (result.isPresent()) {
             model.addAttribute("pizza", result.get());
+            model.addAttribute("ingredientiList", ingredientiRepository.findAll());
             return "/edit";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id " + " not found");
@@ -86,8 +94,9 @@ public class PizzaController {
 
     //PostMapping che riceve l'update di edit
     @PostMapping("/edit/{id}")
-    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+    public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("ingredientiList", ingredientiRepository.findAll());
             return "/edit";
         }
         pizzaRepository.save(formPizza);
