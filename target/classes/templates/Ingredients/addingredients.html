@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -16,9 +16,51 @@
     <title>Crea ingredienti</title>
 </head>
 <body>
-<h1>Aggiungi un ingrediente alla lista</h1>
-
-
+<div class="container">
+    <!--Messaggio che arriva dalla redirect-->
+    <div th:if="${message != null}">
+        <div class="alert alert-success alert-dimissibile fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    <h1>Aggiungi un ingrediente alla lista</h1>
+    <!--form per gli ingredienti -->
+    <section class="mb-5">
+        <form
+                th:action="@{/ingredienti/create}"
+                id="ingredienti-form"
+                method="POST"
+                th:object="${ingredienteObj}"
+        >
+            <div>
+                <input type="text" class="form-control" id="ingredientname" th:field="*{nomeIngrediente}"
+                       placeholder="Aggiunge un ingrediente">
+                <button type="submit" class="btn btn-primary">Salva</button>
+            </div>
+        </form>
+    </section>
+    <!-- Elenco degli ingredienti -->
+    <section>
+        <ul class="list-group">
+            <li
+                    class="list-group-item d-flex align-items-center justify-content-between"
+                    th:each="ingrediente : ${ingredientiList}"
+            >
+                <div th:text="${ingrediente.nomeIngrediente}"></div>
+                <div>
+                    <form
+                            method="POST"
+                            th:action="@{/ingredienti/delete/{ingId}(ingId = ${ingrediente.id})}"
+                    >
+                        <button class="btn btn-primary" type="submit"><i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
