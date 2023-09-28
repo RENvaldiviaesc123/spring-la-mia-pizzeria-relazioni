@@ -43,9 +43,9 @@
             </thead>
             <tbody>
             <tr th:each="offerta : ${pizza.offerte}">
-                <td th:text="offerta.title"></td>
-                <td th:text="offerta.dataInizio"></td>
-                <td th:text="offerta.dataFine"></td>
+                <td th:text="${offerta.title}"></td>
+                <td th:text="${offerta.dataInizio}"></td>
+                <td th:text="${offerta.dataFine}"></td>
                 <td></td>
             </tr>
             </tbody>

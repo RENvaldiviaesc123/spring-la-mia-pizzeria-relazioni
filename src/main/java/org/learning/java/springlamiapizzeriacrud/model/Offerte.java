@@ -20,6 +20,7 @@ public class Offerte {
     @NotNull(message = "Inserisca una data di fine ")
     private LocalDate dataFine;
     @ManyToOne
+    @NotNull
     private Pizza pizza;
 
     //GETTER SETTER

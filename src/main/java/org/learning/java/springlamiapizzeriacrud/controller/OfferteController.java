@@ -1,5 +1,6 @@
 package org.learning.java.springlamiapizzeriacrud.controller;
 
+import jakarta.validation.Valid;
 import org.learning.java.springlamiapizzeriacrud.model.Offerte;
 import org.learning.java.springlamiapizzeriacrud.model.Pizza;
 import org.learning.java.springlamiapizzeriacrud.repository.OfferteRepository;
@@ -25,7 +26,7 @@ public class OfferteController {
 
     //Metodo per aggiungere un'offerta
     @GetMapping("/create")
-    public String create(@RequestParam("pizzaId") Integer pizzaId, Model model) {
+    public String create(@Valid @RequestParam("pizzaId") Integer pizzaId, Model model) {
         Optional<Pizza> risultatoPizza = pizzaRepository.findById(pizzaId);
 
         if (risultatoPizza.isPresent()) {
@@ -42,7 +43,7 @@ public class OfferteController {
     }
 
     @PostMapping("/create")
-    public String doCreate(@ModelAttribute("offerta") Offerte offertaForm) {
+    public String doCreate(@Valid @ModelAttribute("offerta") Offerte offertaForm) {
         offerteRepository.save(offertaForm);
         return "redirect:/pizze/detail/" + offertaForm.getPizza().getId();
     }
@@ -54,7 +55,7 @@ public class OfferteController {
         Optional<Offerte> risultatoOfferta = offerteRepository.findById(id);
         if (risultatoOfferta.isPresent()) {
             model.addAttribute("offerta", risultatoOfferta.get());
-            return "/offerte/edit";
+            return "offerte/edit";
 
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
