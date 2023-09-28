@@ -18,14 +18,26 @@
 <body>
 <div class="container">
     <h1 th:text="${pizza.name}"></h1>
-    <h4>La pizza presenta i seguenti ingredienti: </h4>
-    <p th:text="${pizza.description}"></p>
-    <h4>Il suo prezzo è:</h4>
-    <p th:text="${pizza.price}"></p>
-    <h4>Immagine referenziale:</h4>
-    <img th:src="${pizza.foto}">
-    <div class="mb-3 mt-3">
-        <a class="btn btn-primary" th:href="@{/pizze}">Torna indietro</a>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <h4>La pizza presenta i seguenti ingredienti: </h4>
+            <p th:text="${pizza.description}"></p>
+            <h4>Il suo prezzo è:</h4>
+            <p th:text="${pizza.price}"></p>
+            <h4>Immagine referenziale:</h4>
+            <img th:src="${pizza.foto}">
+            <div class="mb-3 mt-3">
+                <a class="btn btn-primary" th:href="@{/pizze}">Torna indietro</a>
+            </div>
+        </div>
+        <!-- INGREDIENTI -->
+        <div class="col-6">
+            <h4>Ingredienti</h4>
+            <ul>
+                <li th:each="ingrediente : ${pizza.ingredienti}" th:text="${ingrediente.nomeIngrediente}"></li>
+            </ul>
+        </div>
     </div>
     <!--OFFERTE-->
     <div class="row">
@@ -35,7 +47,6 @@
                     class="btn btn-primary"
                     th:href="@{/offerte/create(pizzaId = ${pizza.id})}">Aggiungi Offerta</a>
         </div>
-
         <table class="table">
             <thead>
             <tr>
