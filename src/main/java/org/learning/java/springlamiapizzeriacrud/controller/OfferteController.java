@@ -45,7 +45,7 @@ public class OfferteController {
     @PostMapping("/create")
     public String doCreate(@Valid @ModelAttribute("offerta") Offerte offertaForm) {
         offerteRepository.save(offertaForm);
-        return "redirect:/pizze/detail/" + offertaForm.getPizza().getId();
+        return "redirect:/pizze/show/" + offertaForm.getPizza().getId();
     }
 
 
@@ -66,7 +66,7 @@ public class OfferteController {
     public String doEdit(@PathVariable("offertaId") Integer offertaId, @ModelAttribute("offerta") Offerte offertaForm) {
         offertaForm.setId(offertaId);
         offerteRepository.save(offertaForm);
-        return "redirect:/pizze/detail/" + offertaForm.getPizza().getId();
+        return "redirect:/pizze/show/" + offertaForm.getPizza().getId();
     }
 
     //Metodo per la delete
@@ -76,7 +76,7 @@ public class OfferteController {
         if (risultatoOfferta.isPresent()) {
             Integer pizzaId = risultatoOfferta.get().getPizza().getId();
             offerteRepository.deleteById(id);
-            return "redirect:/pizze/detail/" + pizzaId;
+            return "redirect:/pizze/show/" + pizzaId;
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
